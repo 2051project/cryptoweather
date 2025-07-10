@@ -11,16 +11,16 @@ dependencies = [
 ]
 readme = "README.md"
 requires-python = ">=3.10"
+license = {text = "MIT"}
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-keywords = ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "robo-advisor", "agent", "quant", "chart", "technical"]
+keywords = ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading"]
 
 [project.urls]
 Homepage = "https://cryptoweather.xyz"
@@ -28,14 +28,15 @@ Repository = "https://github.com/2051project/cryptoweather"
 Documentation = "https://cryptoweather.xyz"
 
 [project.scripts]
-cryptoweather = "cryptoweather.main:main"
+cryptoweather = "main:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
+include = ["main*"]
 
-[tool.setuptools.package-data]
-cryptoweather = ["py.typed"]
+[tool.setuptools.py-modules]
+main = "main"
