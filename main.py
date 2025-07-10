@@ -7,6 +7,11 @@ import requests
 from datetime import datetime
 from mcp.server.fastmcp import FastMCP
 
+# Parse command line arguments
+parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
+parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+args = parser.parse_args()
+
 # Initialize server
 mcp = FastMCP("cryptoweather")
 
@@ -171,7 +176,6 @@ Generally, clarity above 70% suggests higher reliability.
 - Always manage risk appropriately
 - Consider multiple timeframes and indicators"""
 
-# Main execution
 def main():
     """Main entry point for the MCP server"""
     # Parse command line arguments
@@ -187,5 +191,6 @@ def main():
     # Run the server
     mcp.run()
 
+# Main execution
 if __name__ == "__main__":
     main()
