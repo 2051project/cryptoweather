@@ -125,7 +125,7 @@ python main.py --debug
 
 ### Requirements
 
-- Python 3.10+
+- Python 3.11+
 - fastmcp >= 0.1.0
 - requests >= 2.28.0
 
