@@ -1,0 +1,34 @@
+{
+  "name": "@2051project/cryptoweather",
+  "version": "1.0.0",
+  "description": "AI-powered Bitcoin price prediction signals from CryptoWeather",
+  "main": "main.py",
+  "scripts": {
+    "start": "python main.py",
+    "dev": "python main.py --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2051project/cryptoweather.git"
+  },
+  "keywords": [
+    "mcp",
+    "bitcoin",
+    "cryptocurrency",
+    "ai",
+    "prediction",
+    "trading"
+  ],
+  "author": "CryptoWeather Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/2051project/cryptoweather/issues"
+  },
+  "homepage": "https://cryptoweather.xyz",
+  "mcp": {
+    "server": {
+      "command": "python",
+      "args": ["main.py"]
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "cryptoweather",
+  "version": "1.0.0",
+  "description": "AI-powered Bitcoin price prediction signals from CryptoWeather",
+  "author": "CryptoWeather Team",
+  "homepage": "https://cryptoweather.xyz",
+  "repository": "https://github.com/2051project/cryptoweather",
+  "license": "MIT",
+  "categories": ["finance", "ai", "cryptocurrency", "trading"],
+  "keywords": ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "robo-advisor", "agent", "quant", "chart", "technical"],
+  "runtime": "python",
+  "entrypoint": "main.py",
+  "connection": {
+    "type": "server",
+    "command": "python",
+    "args": ["main.py"]
+  },
+  "tools": [
+    {
+      "name": "get_bitcoin_signal",
+      "description": "Get current Bitcoin price prediction signal from CryptoWeather AI",
+      "parameters": {},
+      "returns": "Current Bitcoin signal with clarity, position, and profit information"
+    },
+    {
+      "name": "get_trading_recommendation", 
+      "description": "Get detailed trading recommendation based on current Bitcoin signal",
+      "parameters": {},
+      "returns": "Detailed trading advice with buy/sell/hold recommendations"
+    },
+    {
+      "name": "get_performance_metrics",
+      "description": "Get CryptoWeather AI performance metrics and statistics", 
+      "parameters": {},
+      "returns": "Historical performance data, backtest results, and profit metrics"
+    },
+    {
+      "name": "get_signal_history",
+      "description": "Get information about CryptoWeather signal updates and methodology",
+      "parameters": {},
+      "returns": "Information about signal types, update frequency, and interpretation guide"
+    }
+  ],
+  "requirements": [
+    "fastmcp>=0.1.0",
+    "requests>=2.28.0"
+  ],
+  "python_version": ">=3.10",
+  "configuration": {
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debug mode for detailed logging",
+      "default": false
+    }
+  },
+  "permissions": {
+    "network": {
+      "description": "Required to fetch Bitcoin signals from CryptoWeather API",
+      "hosts": ["cryptoweather.xyz"]
+    }
+  },
+  "disclaimer": "CryptoWeather predictions are for informational purposes only. This is not financial advice. Always do your own research and consider your risk tolerance before making trading decisions.",
+  "tags": ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "robo-advisor", "agent", "quant", "chart", "technical"]
+}

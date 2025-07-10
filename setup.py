@@ -12,7 +12,7 @@ setup(
         "fastmcp>=0.1.0",
         "requests>=2.28.0",
     ],
-    python_requires=">=3.11",
+    python_requires=">=3.10",
     entry_points={
         "console_scripts": [
             "cryptoweather=main:main",
@@ -23,7 +23,7 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.12",
     ],
     keywords = ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "robo-advisor", "agent", "quant", "chart", "technical"],
