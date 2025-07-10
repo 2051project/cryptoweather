@@ -25,7 +25,7 @@ CryptoWeather MCP Server provides real-time Bitcoin price prediction signals fro
   "mcpServers": {
     "cryptoweather": {
       "command": "python",
-      "args": ["/path/to/cryptoweather-mcp/main.py"]
+      "args": ["/path/to/cryptoweather/main.py"]
     }
   }
 }
@@ -34,14 +34,14 @@ CryptoWeather MCP Server provides real-time Bitcoin price prediction signals fro
 ### For Developers
 
 ```bash
-pip install cryptoweather-mcp
+pip install cryptoweather
 ```
 
 Or install from source:
 
 ```bash
-git clone https://github.com/cryptoweather/cryptoweather-mcp.git
-cd cryptoweather-mcp
+git clone https://github.com/2051project/cryptoweather.git
+cd cryptoweather
 pip install -e .
 ```
 
@@ -109,8 +109,7 @@ Claude: [Uses get_performance_metrics() to show backtest results]
 ## Support
 
 - Website: [https://cryptoweather.xyz](https://cryptoweather.xyz)
-- Documentation: [https://cryptoweather.xyz/docs](https://cryptoweather.xyz/docs)
-- Issues: [GitHub Issues](https://github.com/cryptoweather/cryptoweather-mcp/issues)
+- Issues: [GitHub Issues](https://github.com/2051project/cryptoweather/issues)
 
 ## License
 

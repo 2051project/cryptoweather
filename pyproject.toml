@@ -1,5 +1,5 @@
 [project]
-name = "cryptoweather-mcp"
+name = "cryptoweather"
 version = "1.0.0"
 description = "MCP server for CryptoWeather Bitcoin price prediction AI"
 authors = [
@@ -26,11 +26,11 @@ keywords = ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "
 
 [project.urls]
 Homepage = "https://cryptoweather.xyz"
-Repository = "https://github.com/cryptoweather/cryptoweather-mcp"
+Repository = "https://github.com/2051project/cryptoweather"
 Documentation = "https://cryptoweather.xyz"
 
 [project.scripts]
-cryptoweather-mcp = "cryptoweather_mcp.main:main"
+cryptoweather = "cryptoweather.main:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
@@ -40,4 +40,4 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.setuptools.package-data]
-cryptoweather_mcp = ["py.typed"]
+cryptoweather = ["py.typed"]
