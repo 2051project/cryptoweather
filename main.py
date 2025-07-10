@@ -1,61 +1,84 @@
 #!/usr/bin/env python3
+"""
+CryptoWeather MCP Server
+AI-powered Bitcoin price prediction signals
+"""
+
 import os
 import sys
 import argparse
 import json
 import requests
 from datetime import datetime
-from mcp.server.fastmcp import FastMCP
 
-# CryptoWeather API endpoint
-CRYPTOWEATHER_API_URL = os.getenv("CRYPTOWEATHER_API_URL", "https://cryptoweather.xyz/signal_btc")
+# Add current directory to Python path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    from mcp.server.fastmcp import FastMCP
+except ImportError as e:
+    print(f"Error importing FastMCP: {e}", file=sys.stderr)
+    print("Please install FastMCP: pip install fastmcp", file=sys.stderr)
+    sys.exit(1)
+
+# Parse command line arguments
+parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
+parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+args = parser.parse_args()
 
 # Initialize server
 mcp = FastMCP("cryptoweather")
 
-def fetch_bitcoin_signal():
-    """Helper function to fetch Bitcoin signal from CryptoWeather API"""
-    try:
-        response = requests.get(CRYPTOWEATHER_API_URL, timeout=10)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        raise Exception(f"Network error: {str(e)}")
-    except json.JSONDecodeError as e:
-        raise Exception(f"Invalid JSON response: {str(e)}")
+# CryptoWeather API endpoint
+CRYPTOWEATHER_API_URL = os.getenv("CRYPTOWEATHER_API_URL", "https://cryptoweather.xyz/signal_btc")
 
 @mcp.tool()
 def get_bitcoin_signal() -> str:
     """Get current Bitcoin price prediction signal from CryptoWeather AI"""
     try:
-        data = fetch_bitcoin_signal()
+        response = requests.get(CRYPTOWEATHER_API_URL, timeout=10)
+        response.raise_for_status()
+        
+        data = response.json()
         
         # Extract information from the response
         clear_data = data.get("Clear", {})
         version = data.get("version", "unknown")
         
         # Format the response
+        signal_info = {
+            "Signal": clear_data.get("signal", "Unknown"),
+            "Clarity": clear_data.get("Clarity", "Unknown"),
+            "Position": clear_data.get("pos", "Unknown"),
+            "Profit": clear_data.get("profit", "Unknown"),
+            "Backtest Performance": clear_data.get("backtest", "Unknown"),
+            "Signal Code": clear_data.get("sig", "Unknown"),
+            "API Version": version,
+            "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+        
         result = "🔮 CryptoWeather Bitcoin Signal\n"
         result += "=" * 40 + "\n"
-        result += f"Signal: {clear_data.get('signal', 'Unknown')}\n"
-        result += f"Clarity: {clear_data.get('Clarity', 'Unknown')}\n"
-        result += f"Position: {clear_data.get('pos', 'Unknown')}\n"
-        result += f"Profit: {clear_data.get('profit', 'Unknown')}\n"
-        result += f"Backtest Performance: {clear_data.get('backtest', 'Unknown')}\n"
-        result += f"Signal Code: {clear_data.get('sig', 'Unknown')}\n"
-        result += f"API Version: {version}\n"
-        result += f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+        for key, value in signal_info.items():
+            result += f"{key}: {value}\n"
         
         return result
         
+    except requests.exceptions.RequestException as e:
+        return f"❌ Error fetching Bitcoin signal: Network error - {str(e)}"
+    except json.JSONDecodeError as e:
+        return f"❌ Error parsing Bitcoin signal: Invalid JSON response - {str(e)}"
     except Exception as e:
-        return f"❌ Error fetching Bitcoin signal: {str(e)}"
+        return f"❌ Unexpected error: {str(e)}"
 
 @mcp.tool()
 def get_trading_recommendation() -> str:
     """Get detailed trading recommendation based on current Bitcoin signal"""
     try:
-        data = fetch_bitcoin_signal()
+        response = requests.get(CRYPTOWEATHER_API_URL, timeout=10)
+        response.raise_for_status()
+        
+        data = response.json()
         clear_data = data.get("Clear", {})
         
         position = clear_data.get("pos", "").lower()
@@ -90,14 +113,21 @@ def get_trading_recommendation() -> str:
         
         return result
         
+    except requests.exceptions.RequestException as e:
+        return f"❌ Error fetching trading recommendation: Network error - {str(e)}"
+    except json.JSONDecodeError as e:
+        return f"❌ Error parsing trading data: Invalid JSON response - {str(e)}"
     except Exception as e:
-        return f"❌ Error fetching trading recommendation: {str(e)}"
+        return f"❌ Unexpected error: {str(e)}"
 
 @mcp.tool()
 def get_performance_metrics() -> str:
     """Get CryptoWeather AI performance metrics and statistics"""
     try:
-        data = fetch_bitcoin_signal()
+        response = requests.get(CRYPTOWEATHER_API_URL, timeout=10)
+        response.raise_for_status()
+        
+        data = response.json()
         clear_data = data.get("Clear", {})
         
         backtest = clear_data.get("backtest", "0%")
@@ -117,11 +147,15 @@ def get_performance_metrics() -> str:
         
         return result
         
+    except requests.exceptions.RequestException as e:
+        return f"❌ Error fetching performance metrics: Network error - {str(e)}"
+    except json.JSONDecodeError as e:
+        return f"❌ Error parsing performance data: Invalid JSON response - {str(e)}"
     except Exception as e:
-        return f"❌ Error fetching performance metrics: {str(e)}"
+        return f"❌ Unexpected error: {str(e)}"
 
 @mcp.tool()
-def get_signal_information() -> str:
+def get_signal_history() -> str:
     """Get information about CryptoWeather signal updates and methodology"""
     return """🕐 CryptoWeather Signal Information
 ========================================
@@ -158,23 +192,27 @@ Generally, clarity above 70% suggests higher reliability.
 
 def main():
     """Main entry point for the MCP server"""
-    # Parse command line arguments
-    parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
-    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
-    args = parser.parse_args()
-    
-    # Debug output if enabled
-    if args.debug:
-        print("Starting CryptoWeather MCP Server...", file=sys.stderr)
-        print(f"API Endpoint: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
-        print("Registered tools:", file=sys.stderr)
-        print("  - get_bitcoin_signal", file=sys.stderr)
-        print("  - get_trading_recommendation", file=sys.stderr)
-        print("  - get_performance_metrics", file=sys.stderr)
-        print("  - get_signal_information", file=sys.stderr)
-    
-    # Run the server
-    mcp.run()
+    try:
+        # Parse command line arguments
+        parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
+        parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+        args = parser.parse_args()
+        
+        # Debug output if enabled
+        if args.debug:
+            print("Starting CryptoWeather MCP Server...", file=sys.stderr)
+            print(f"API Endpoint: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
+            print(f"Python version: {sys.version}", file=sys.stderr)
+            print(f"Working directory: {os.getcwd()}", file=sys.stderr)
+        
+        # Run the server
+        mcp.run()
+        
+    except Exception as e:
+        print(f"Error starting CryptoWeather MCP Server: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 # Main execution
 if __name__ == "__main__":
