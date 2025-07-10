@@ -1,25 +1,11 @@
 #!/usr/bin/env python3
-"""
-CryptoWeather MCP Server
-AI-powered Bitcoin price prediction signals
-"""
-
 import os
 import sys
 import argparse
 import json
 import requests
 from datetime import datetime
-
-# Add current directory to Python path for imports
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-try:
-    from mcp.server.fastmcp import FastMCP
-except ImportError as e:
-    print(f"Error importing FastMCP: {e}", file=sys.stderr)
-    print("Please install FastMCP: pip install fastmcp", file=sys.stderr)
-    sys.exit(1)
+from mcp.server.fastmcp import FastMCP
 
 # Parse command line arguments
 parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
@@ -31,6 +17,11 @@ mcp = FastMCP("cryptoweather")
 
 # CryptoWeather API endpoint
 CRYPTOWEATHER_API_URL = os.getenv("CRYPTOWEATHER_API_URL", "https://cryptoweather.xyz/signal_btc")
+
+@mcp.tool()
+def test_connection() -> str:
+    """Test if CryptoWeather MCP server is working properly"""
+    return f"✅ CryptoWeather MCP Server is running!\n🕐 Current time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n🔗 API endpoint: {CRYPTOWEATHER_API_URL}"
 
 @mcp.tool()
 def get_bitcoin_signal() -> str:
@@ -192,27 +183,24 @@ Generally, clarity above 70% suggests higher reliability.
 
 def main():
     """Main entry point for the MCP server"""
-    try:
-        # Parse command line arguments
-        parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
-        parser.add_argument("--debug", action="store_true", help="Enable debug mode")
-        args = parser.parse_args()
-        
-        # Debug output if enabled
-        if args.debug:
-            print("Starting CryptoWeather MCP Server...", file=sys.stderr)
-            print(f"API Endpoint: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
-            print(f"Python version: {sys.version}", file=sys.stderr)
-            print(f"Working directory: {os.getcwd()}", file=sys.stderr)
-        
-        # Run the server
-        mcp.run()
-        
-    except Exception as e:
-        print(f"Error starting CryptoWeather MCP Server: {e}", file=sys.stderr)
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+    args = parser.parse_args()
+    
+    # Debug output if enabled
+    if args.debug:
+        print("Starting CryptoWeather MCP Server...", file=sys.stderr)
+        print(f"API Endpoint: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
+        print("Available tools:", file=sys.stderr)
+        print("- get_bitcoin_signal", file=sys.stderr)
+        print("- get_trading_recommendation", file=sys.stderr)
+        print("- get_performance_metrics", file=sys.stderr)
+        print("- get_signal_history", file=sys.stderr)
+        print("Server is ready to handle requests...", file=sys.stderr)
+    
+    # Run the server
+    mcp.run()
 
 # Main execution
 if __name__ == "__main__":
