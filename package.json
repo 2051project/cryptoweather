@@ -1,11 +1,11 @@
 {
   "name": "@2051project/cryptoweather",
   "version": "1.0.0",
-  "description": "AI-powered Bitcoin price prediction signals from CryptoWeather",
+  "description": "MCP server for CryptoWeather Bitcoin price prediction AI",
   "main": "main.py",
   "scripts": {
-    "start": "python main.py",
-    "dev": "python main.py --debug"
+    "start": "python3 main.py",
+    "dev": "python3 main.py --debug"
   },
   "repository": {
     "type": "git",
@@ -25,10 +25,11 @@
     "url": "https://github.com/2051project/cryptoweather/issues"
   },
   "homepage": "https://cryptoweather.xyz",
-  "mcp": {
-    "server": {
-      "command": "python",
-      "args": ["main.py"]
-    }
+  "engines": {
+    "python": ">=3.10"
+  },
+  "dependencies": {
+    "fastmcp": ">=0.1.0",
+    "requests": ">=2.28.0"
   }
 }

@@ -16,7 +16,7 @@ args = parser.parse_args()
 mcp = FastMCP("cryptoweather")
 
 # CryptoWeather API endpoint
-CRYPTOWEATHER_API_URL = "https://cryptoweather.xyz/signal_btc"
+CRYPTOWEATHER_API_URL = os.getenv("CRYPTOWEATHER_API_URL", "https://cryptoweather.xyz/signal_btc")
 
 @mcp.tool()
 def get_bitcoin_signal() -> str:
