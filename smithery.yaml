@@ -8,29 +8,18 @@ startCommand:
         type: boolean
         description: "Enable debug mode for detailed logging"
         default: false
+      apiUrl:
+        type: string
+        description: "CryptoWeather API endpoint URL"
+        default: "https://cryptoweather.xyz/signal_btc"
   commandFunction: |
-    (config) => {
-      const path = require('path');
-      const fs = require('fs');
-      
-      // Get the directory where this package is installed
-      const packageDir = __dirname;
-      const mainPyPath = path.join(packageDir, 'main.py');
-      
-      // Check if main.py exists
-      if (!fs.existsSync(mainPyPath)) {
-        throw new Error(`main.py not found at ${mainPyPath}`);
+    (config) => ({
+      command: 'python3',
+      args: ['main.py'].concat(config.debug ? ['--debug'] : []),
+      env: {
+        CRYPTOWEATHER_API_URL: config.apiUrl || "https://cryptoweather.xyz/signal_btc"
       }
-      
-      return {
-        command: 'python3',
-        args: [mainPyPath].concat(config.debug ? ['--debug'] : []),
-        cwd: packageDir,
-        env: {
-          CRYPTOWEATHER_API_URL: "https://cryptoweather.xyz/signal_btc",
-          PYTHONPATH: packageDir
-        }
-      };
-    }
+    })
   exampleConfig:
     debug: false
+    apiUrl: "https://cryptoweather.xyz/signal_btc"
