@@ -19,6 +19,11 @@ mcp = FastMCP("cryptoweather")
 CRYPTOWEATHER_API_URL = os.getenv("CRYPTOWEATHER_API_URL", "https://cryptoweather.xyz/signal_btc")
 
 @mcp.tool()
+def test_connection() -> str:
+    """Test if CryptoWeather MCP server is working properly"""
+    return f"✅ CryptoWeather MCP Server is running!\n🕐 Current time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n🔗 API endpoint: {CRYPTOWEATHER_API_URL}"
+
+@mcp.tool()
 def get_bitcoin_signal() -> str:
     """Get current Bitcoin price prediction signal from CryptoWeather AI"""
     try:
@@ -187,6 +192,12 @@ def main():
     if args.debug:
         print("Starting CryptoWeather MCP Server...", file=sys.stderr)
         print(f"API Endpoint: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
+        print("Available tools:", file=sys.stderr)
+        print("- get_bitcoin_signal", file=sys.stderr)
+        print("- get_trading_recommendation", file=sys.stderr)
+        print("- get_performance_metrics", file=sys.stderr)
+        print("- get_signal_history", file=sys.stderr)
+        print("Server is ready to handle requests...", file=sys.stderr)
     
     # Run the server
     mcp.run()
