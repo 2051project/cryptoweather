@@ -1,4 +1,5 @@
 # CryptoWeather MCP Server
+[![smithery badge](https://smithery.ai/badge/@2051project/cryptoweather)](https://smithery.ai/server/@2051project/cryptoweather)
 
 🔮 AI-powered Bitcoin price prediction signals through Model Context Protocol (MCP)
 
@@ -15,6 +16,14 @@ CryptoWeather MCP Server provides real-time Bitcoin price prediction signals fro
 - **Hourly Updates**: Fresh predictions updated every hour
 
 ## Installation
+
+### Installing via Smithery
+
+To install cryptoweather for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@2051project/cryptoweather):
+
+```bash
+npx -y @smithery/cli install @2051project/cryptoweather --client claude
+```
 
 ### For Claude Desktop Users
 
