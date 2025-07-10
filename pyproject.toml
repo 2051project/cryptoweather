@@ -27,11 +27,8 @@ Repository = "https://github.com/2051project/cryptoweather"
 Documentation = "https://cryptoweather.xyz"
 
 [project.scripts]
-cryptoweather-mcp = "main:main"
+cryptoweather = "main:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
-
-[tool.setuptools.py-modules]
-main = "main"
