@@ -26,5 +26,5 @@ setup(
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
     ],
-    keywords=keywords = ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "robo-advisor", "agent", "quant", "chart", "technical"],
+    keywords = ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "robo-advisor", "agent", "quant", "chart", "technical"],
 )
