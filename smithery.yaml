@@ -1,0 +1,29 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => {
+      const args = [];
+      if (config.debug) args.push('--debug');
+      args.push('--api-timeout', String(config.apiTimeout));
+      return { command: 'python', args: ['main.py', ...args] };
+    }
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required: []
+    properties:
+      debug:
+        type: boolean
+        default: false
+        description: Enable debug mode
+      apiTimeout:
+        type: number
+        default: 10
+        description: API timeout in seconds
+  exampleConfig:
+    debug: false
+    apiTimeout: 10
