@@ -67,8 +67,8 @@ Claude: [Uses get_performance_metrics() to show backtest results]
 
 ## Signal Types
 
-- **☀️ Clear**: Strong directional signal with high confidence
-- **☁️ Cloudy**: Mixed or uncertain market conditions
+- **Sunny ☀️**: Strong directional signal with high confidence
+- **Cloudy ☁️**: Mixed or uncertain market conditions
 
 ## Position Types
 
