@@ -33,11 +33,7 @@ CryptoWeather MCP Server provides real-time Bitcoin price prediction signals fro
 
 ### For Developers
 
-```bash
-pip install cryptoweather
-```
-
-Or install from source:
+Install from source:
 
 ```bash
 git clone https://github.com/2051project/cryptoweather.git
@@ -73,7 +69,6 @@ Claude: [Uses get_performance_metrics() to show backtest results]
 
 - **☀️ Clear**: Strong directional signal with high confidence
 - **☁️ Cloudy**: Mixed or uncertain market conditions
-- **⛈️ Stormy**: High volatility expected
 
 ## Position Types
 
