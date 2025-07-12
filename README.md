@@ -43,6 +43,7 @@ pip install -e .
 
 ## Usage
 
+![conversations](img/cryptoweatherMCP_chat.gif)
 Once installed, you can use the following tools in your Claude conversations:
 
 ### Available Tools
