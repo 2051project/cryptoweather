@@ -42,11 +42,7 @@ npx -y @smithery/cli install @2051project/cryptoweather --client claude
 
 ### For Developers
 
-```bash
-pip install cryptoweather
-```
-
-Or install from source:
+Install from source:
 
 ```bash
 git clone https://github.com/2051project/cryptoweather.git
@@ -55,7 +51,6 @@ pip install -e .
 ```
 
 ## Usage
-
 Once installed, you can use the following tools in your Claude conversations:
 
 ### Available Tools
@@ -67,22 +62,12 @@ Once installed, you can use the following tools in your Claude conversations:
 
 ### Example Usage
 
-```
-User: What's the current Bitcoin signal?
-Claude: [Uses get_bitcoin_signal() to fetch real-time data]
-
-User: Should I buy Bitcoin right now?
-Claude: [Uses get_trading_recommendation() for detailed analysis]
-
-User: How well has the AI performed historically?
-Claude: [Uses get_performance_metrics() to show backtest results]
-```
+![conversations](img/cryptoweatherMCP_chat.gif)
 
 ## Signal Types
 
-- **☀️ Clear**: Strong directional signal with high confidence
-- **☁️ Cloudy**: Mixed or uncertain market conditions
-- **⛈️ Stormy**: High volatility expected
+- **Sunny ☀️**: Strong directional signal with high confidence
+- **Cloudy ☁️**: Mixed or uncertain market conditions
 
 ## Position Types
 
@@ -134,7 +119,7 @@ python main.py --debug
 
 ### Requirements
 
-- Python 3.8+
+- Python 3.10+
 - fastmcp >= 0.1.0
 - requests >= 2.28.0
 

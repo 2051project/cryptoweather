@@ -1,0 +1,41 @@
+{
+  "name": "@2051project/cryptoweather",
+  "version": "1.0.0",
+  "description": "MCP server for CryptoWeather Bitcoin price prediction AI",
+  "main": "main.py",
+  "scripts": {
+    "start": "python3 main.py",
+    "dev": "python3 main.py --debug",
+    "postinstall": "python3 -m pip install --user -r requirements.txt || pip3 install --user -r requirements.txt || echo 'Warning: Could not install Python dependencies automatically. Please run: pip install fastmcp requests'"
+  },
+  "files": [
+    "main.py",
+    "requirements.txt",
+    "smithery.yaml",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2051project/cryptoweather.git"
+  },
+  "keywords": [
+    "mcp",
+    "bitcoin",
+    "cryptocurrency",
+    "ai",
+    "prediction",
+    "trading"
+  ],
+  "author": "CryptoWeather Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/2051project/cryptoweather/issues"
+  },
+  "homepage": "https://cryptoweather.xyz",
+  "engines": {
+    "python": ">=3.10"
+  },
+  "peerDependencies": {
+    "python3": ">=3.10"
+  }
+}

@@ -5,42 +5,29 @@ import argparse
 import json
 import requests
 from datetime import datetime
-
-# Add the current directory to Python path for imports
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-try:
-    from mcp.server.fastmcp import FastMCP
-except ImportError:
-    print("Error: fastmcp not found. Please install with: pip install fastmcp", file=sys.stderr)
-    sys.exit(1)
+from mcp.server.fastmcp import FastMCP
 
 # Parse command line arguments
 parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
 parser.add_argument("--debug", action="store_true", help="Enable debug mode")
-parser.add_argument("--api-timeout", type=int, default=10, help="API timeout in seconds")
 args = parser.parse_args()
-
-# Get configuration from environment variables (set by manifest)
-DEBUG_MODE = os.getenv("DEBUG", "false").lower() == "true" or args.debug
-API_TIMEOUT = int(os.getenv("API_TIMEOUT", str(args.api_timeout)))
 
 # Initialize server
 mcp = FastMCP("cryptoweather")
 
 # CryptoWeather API endpoint
-CRYPTOWEATHER_API_URL = "https://cryptoweather.xyz/signal_btc"
+CRYPTOWEATHER_API_URL = os.getenv("CRYPTOWEATHER_API_URL", "https://cryptoweather.xyz/signal_btc")
 
-if DEBUG_MODE:
-    print(f"[DEBUG] Starting CryptoWeather MCP Server", file=sys.stderr)
-    print(f"[DEBUG] API URL: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
-    print(f"[DEBUG] API Timeout: {API_TIMEOUT}s", file=sys.stderr)
+@mcp.tool()
+def test_connection() -> str:
+    """Test if CryptoWeather MCP server is working properly"""
+    return f"✅ CryptoWeather MCP Server is running!\n🕐 Current time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n🔗 API endpoint: {CRYPTOWEATHER_API_URL}"
 
 @mcp.tool()
 def get_bitcoin_signal() -> str:
     """Get current Bitcoin price prediction signal from CryptoWeather AI"""
     try:
-        response = requests.get(CRYPTOWEATHER_API_URL, timeout=API_TIMEOUT)
+        response = requests.get(CRYPTOWEATHER_API_URL, timeout=10)
         response.raise_for_status()
         
         data = response.json()
@@ -79,7 +66,7 @@ def get_bitcoin_signal() -> str:
 def get_trading_recommendation() -> str:
     """Get detailed trading recommendation based on current Bitcoin signal"""
     try:
-        response = requests.get(CRYPTOWEATHER_API_URL, timeout=API_TIMEOUT)
+        response = requests.get(CRYPTOWEATHER_API_URL, timeout=10)
         response.raise_for_status()
         
         data = response.json()
@@ -128,7 +115,7 @@ def get_trading_recommendation() -> str:
 def get_performance_metrics() -> str:
     """Get CryptoWeather AI performance metrics and statistics"""
     try:
-        response = requests.get(CRYPTOWEATHER_API_URL, timeout=API_TIMEOUT)
+        response = requests.get(CRYPTOWEATHER_API_URL, timeout=10)
         response.raise_for_status()
         
         data = response.json()
@@ -194,13 +181,27 @@ Generally, clarity above 70% suggests higher reliability.
 - Always manage risk appropriately
 - Consider multiple timeframes and indicators"""
 
-# Main execution
-if __name__ == "__main__":
+def main():
+    """Main entry point for the MCP server"""
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+    args = parser.parse_args()
+    
     # Debug output if enabled
-    if DEBUG_MODE:
+    if args.debug:
         print("Starting CryptoWeather MCP Server...", file=sys.stderr)
         print(f"API Endpoint: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
-        print(f"API Timeout: {API_TIMEOUT}s", file=sys.stderr)
+        print("Available tools:", file=sys.stderr)
+        print("- get_bitcoin_signal", file=sys.stderr)
+        print("- get_trading_recommendation", file=sys.stderr)
+        print("- get_performance_metrics", file=sys.stderr)
+        print("- get_signal_history", file=sys.stderr)
+        print("Server is ready to handle requests...", file=sys.stderr)
     
     # Run the server
     mcp.run()
+
+# Main execution
+if __name__ == "__main__":
+    main()
