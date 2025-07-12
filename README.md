@@ -42,8 +42,6 @@ pip install -e .
 ```
 
 ## Usage
-
-![conversations](img/cryptoweatherMCP_chat.gif)
 Once installed, you can use the following tools in your Claude conversations:
 
 ### Available Tools
@@ -55,16 +53,7 @@ Once installed, you can use the following tools in your Claude conversations:
 
 ### Example Usage
 
-```
-User: What's the current Bitcoin signal?
-Claude: [Uses get_bitcoin_signal() to fetch real-time data]
-
-User: Should I buy Bitcoin right now?
-Claude: [Uses get_trading_recommendation() for detailed analysis]
-
-User: How well has the AI performed historically?
-Claude: [Uses get_performance_metrics() to show backtest results]
-```
+![conversations](img/cryptoweatherMCP_chat.gif)
 
 ## Signal Types
 
