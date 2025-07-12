@@ -5,7 +5,7 @@ setup(
     version="1.0.0",
     description="MCP server for CryptoWeather Bitcoin price prediction AI",
     author="CryptoWeather Team",
-    author_email="info@cryptoweather.xyz",
+    author_email="satoshi@cryptoweather.xyz",
     url="https://github.com/2051project/cryptoweather",
     py_modules=["main"],
     install_requires=[
