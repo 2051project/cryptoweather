@@ -1,25 +1,40 @@
-# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
 startCommand:
   type: stdio
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => {
+      const args = [];
+      if (config.debug) args.push('--debug');
+      if (config.apiTimeout) args.push('--api-timeout', String(config.apiTimeout));
+      
+      return { 
+        command: 'python3', 
+        args: ['main.py', ...args],
+        env: {
+          CRYPTOWEATHER_API_URL: config.apiUrl || "https://cryptoweather.xyz/signal_btc"
+        }
+      };
+    }
   configSchema:
+    # JSON Schema defining the configuration options for the MCP.
     type: object
+    required: []
     properties:
       debug:
         type: boolean
-        description: "Enable debug mode for detailed logging"
         default: false
+        description: "Enable debug mode for detailed logging"
+      apiTimeout:
+        type: number
+        default: 10
+        description: "API timeout in seconds"
       apiUrl:
         type: string
         description: "CryptoWeather API endpoint URL"
         default: "https://cryptoweather.xyz/signal_btc"
-  commandFunction: |
-    (config) => ({
-      command: 'python3',
-      args: ['main.py'].concat(config.debug ? ['--debug'] : []),
-      env: {
-        CRYPTOWEATHER_API_URL: config.apiUrl || "https://cryptoweather.xyz/signal_btc"
-      }
-    })
   exampleConfig:
     debug: false
+    apiTimeout: 10
     apiUrl: "https://cryptoweather.xyz/signal_btc"
