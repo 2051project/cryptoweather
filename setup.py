@@ -1,12 +1,12 @@
 from setuptools import setup
 
 setup(
-    name="lolgpt",
+    name="cryptoweather",
     version="1.0.0",
-    description="AI-powered League of Legends professional esports match predictor and summoner analysis tool. Predict outcomes for T1, Faker, Zeus, and other pro players with advanced statistical modeling.",
-    author="lolGPT Team",
-    author_email="faker@1tier.xyz",
-    url="https://github.com/onepersonunicorn/lolgpt",
+    description="MCP server for CryptoWeather Bitcoin price prediction AI",
+    author="CryptoWeather Team",
+    author_email="satoshi@cryptoweather.xyz",
+    url="https://github.com/2051project/cryptoweather",
     py_modules=["main"],
     install_requires=[
         "fastmcp>=0.1.0",
@@ -15,7 +15,7 @@ setup(
     python_requires=">=3.10",
     entry_points={
         "console_scripts": [
-            "lolgpt=main:main",
+            "cryptoweather=main:main",
         ],
     },
     classifiers=[
@@ -27,5 +27,5 @@ setup(
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
     ],
-    keywords = ["mcp", "league-of-legends", "lol", "summoner", "mock-match", "simulation", "esports", "gaming", "riot-games", "summoners-rift", "prediction", "pvp", "comparison", "professional-gaming", "t1", "faker", "zeus", "lck", "lcs", "worlds", "msi", "pro-player", "esports-analytics", "competitive-lol", "team-analysis", "player-stats", "tournament-prediction"],
+    keywords = ["mcp", "bitcoin", "cryptocurrency", "ai", "prediction", "trading", "robo-advisor", "agent", "quant", "chart", "technical"],
 )
