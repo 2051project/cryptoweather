@@ -28,7 +28,7 @@ startCommand:
         description: "Enable debug mode for detailed logging"
       apiTimeout:
         type: number
-        default: 30
+        default: 10
         description: "API timeout in seconds"
       apiUrl:
         type: string
@@ -36,5 +36,5 @@ startCommand:
         default: "https://cryptoweather.xyz/signal_btc"
   exampleConfig:
     debug: false
-    apiTimeout: 30
+    apiTimeout: 10
     apiUrl: "https://cryptoweather.xyz/signal_btc"
