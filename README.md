@@ -1,6 +1,7 @@
 # CryptoWeather MCP Server
 
 [![smithery badge](https://smithery.ai/badge/@2051project/cryptoweather)](https://smithery.ai/server/@2051project/cryptoweather)
+[![MCP Badge](https://lobehub.com/badge/mcp/2051project-cryptoweather)](https://lobehub.com/mcp/2051project-cryptoweather)
 
 🌈 AI-powered Bitcoin price prediction signals through Model Context Protocol (MCP)
 
