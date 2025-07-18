@@ -1,4 +1,4 @@
-# CryptoWeather MCP Server
+# CryptoWeather AI Bitcoin Signal
 
 [![smithery badge](https://smithery.ai/badge/@2051project/cryptoweather)](https://smithery.ai/server/@2051project/cryptoweather)
 [![MCP Badge](https://lobehub.com/badge/mcp/2051project-cryptoweather)](https://lobehub.com/mcp/2051project-cryptoweather)
