@@ -1,7 +1,7 @@
 {
   "name": "cryptoweather",
   "version": "1.0.0",
-  "description": "AI-powered Bitcoin price prediction signals from CryptoWeather",
+  "description": "AI-powered Bitcoin & Ethereum prediction signals and technical market details from CryptoWeather",
   "author": "CryptoWeather Team",
   "homepage": "https://cryptoweather.xyz",
   "repository": "https://github.com/2051project/cryptoweather",
@@ -21,22 +21,52 @@
   },
   "tools": [
     {
+      "name": "get_crypto_signal",
+      "description": "Get current crypto weather prediction signal from CryptoWeather AI",
+      "parameters": {"asset": "btc | eth | ada (default: btc)"},
+      "returns": "Current signal with clarity, position, and profit information"
+    },
+    {
       "name": "get_bitcoin_signal",
       "description": "Get current Bitcoin price prediction signal from CryptoWeather AI",
       "parameters": {},
       "returns": "Current Bitcoin signal with clarity, position, and profit information"
     },
     {
-      "name": "get_trading_recommendation", 
-      "description": "Get detailed trading recommendation based on current Bitcoin signal",
+      "name": "get_ethereum_signal",
+      "description": "Get current Ethereum price prediction signal from CryptoWeather AI",
       "parameters": {},
+      "returns": "Current Ethereum signal with clarity, position, and profit information"
+    },
+    {
+      "name": "get_trading_recommendation",
+      "description": "Get detailed trading recommendation based on the current signal",
+      "parameters": {"asset": "btc | eth | ada (default: btc)"},
       "returns": "Detailed trading advice with buy/sell/hold recommendations"
     },
     {
       "name": "get_performance_metrics",
-      "description": "Get CryptoWeather AI performance metrics and statistics", 
-      "parameters": {},
+      "description": "Get CryptoWeather AI performance metrics and statistics",
+      "parameters": {"asset": "btc | eth | ada (default: btc)"},
       "returns": "Historical performance data, backtest results, and profit metrics"
+    },
+    {
+      "name": "get_market_detail",
+      "description": "Get market detail with technical indicators from 1h candles: OHLCV, 24h change/volume, EMA 9/21/50, RSI(14), Stochastic(14,3,3), MACD(12,26,9)",
+      "parameters": {"asset": "btc | eth | ada (default: btc)"},
+      "returns": "Full technical snapshot of the current market"
+    },
+    {
+      "name": "get_ohlcv",
+      "description": "Get recent 1h OHLCV candles (open, high, low, close, volume)",
+      "parameters": {"asset": "btc | eth | ada (default: btc)", "limit": "number of candles, 1-200 (default: 24)"},
+      "returns": "Table of recent hourly candles"
+    },
+    {
+      "name": "get_indicator",
+      "description": "Get a single technical indicator or price field (open/high/low/close/volume/rsi/stochastic/ema/macd)",
+      "parameters": {"asset": "btc | eth | ada (default: btc)", "indicator": "indicator name (default: rsi)", "period": "optional period override for rsi/ema"},
+      "returns": "Latest value(s) of the requested indicator with interpretation"
     },
     {
       "name": "get_signal_history",
@@ -59,7 +89,7 @@
   },
   "permissions": {
     "network": {
-      "description": "Required to fetch Bitcoin signals from CryptoWeather API",
+      "description": "Required to fetch signals and market data from CryptoWeather API",
       "hosts": ["cryptoweather.xyz"]
     }
   },

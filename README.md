@@ -49,10 +49,20 @@ Once installed, you can use the following tools in your Claude conversations:
 
 ### Available Tools
 
-1. **`get_bitcoin_signal()`** - Get current Bitcoin prediction signal
-2. **`get_trading_recommendation()`** - Get detailed trading advice
-3. **`get_performance_metrics()`** - View AI performance statistics
-4. **`get_signal_history()`** - Learn about signal methodology
+Signal tools (CryptoWeather AI):
+
+1. **`get_crypto_signal(asset)`** - Get current prediction signal for `btc`, `eth`, or `ada`
+2. **`get_bitcoin_signal()`** - Get current Bitcoin prediction signal
+3. **`get_ethereum_signal()`** - Get current Ethereum prediction signal
+4. **`get_trading_recommendation(asset)`** - Get detailed trading advice
+5. **`get_performance_metrics(asset)`** - View AI performance statistics
+6. **`get_signal_history()`** - Learn about signal methodology
+
+Market detail tools (1h market data from the CryptoWeather API — the same indicators the app's detail screen shows):
+
+7. **`get_market_detail(asset)`** - Full technical snapshot: latest OHLCV, 24h change/volume, EMA 9/21/50, RSI(14), Stochastic(14,3,3), MACD(12,26,9)
+8. **`get_ohlcv(asset, limit)`** - Recent hourly candles (open, high, low, close, volume)
+9. **`get_indicator(asset, indicator, period)`** - A single indicator or price field: `open`, `high`, `low`, `close`, `volume`, `rsi`, `stochastic`, `ema`, `macd`
 
 ### Example Usage
 
