@@ -6,17 +6,40 @@ import json
 import requests
 from datetime import datetime
 from mcp.server.fastmcp import FastMCP
+from starlette.requests import Request
+from starlette.responses import JSONResponse
 
 # Parse command line arguments
 parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
 parser.add_argument("--debug", action="store_true", help="Enable debug mode")
-args = parser.parse_args()
+args, _ = parser.parse_known_args()
+
+# PaaS(PlayMCP in KC, Render 등)는 PORT를 주입한다.
+# PORT/RENDER가 있으면 Streamable HTTP, 없으면 로컬 클라이언트용 stdio로 뜬다.
+PORT = int(os.getenv("PORT", "8000"))
 
 # Initialize server
-mcp = FastMCP("cryptoweather")
+mcp = FastMCP(
+    "cryptoweather",
+    host="0.0.0.0",
+    port=PORT,
+    stateless_http=True,
+    json_response=True,
+)
 
 # CryptoWeather API endpoint
 CRYPTOWEATHER_API_URL = os.getenv("CRYPTOWEATHER_API_URL", "https://cryptoweather.xyz/signal_btc")
+
+
+@mcp.custom_route("/health", methods=["GET"])
+async def health(request: Request) -> JSONResponse:
+    return JSONResponse({"status": "ok", "service": "cryptoweather-mcp"})
+
+
+@mcp.custom_route("/", methods=["GET"])
+async def root(request: Request) -> JSONResponse:
+    # 일부 플랫폼(PlayMCP in KC 등)은 컨테이너 포트의 GET / 로 헬스체크한다
+    return JSONResponse({"status": "ok", "service": "cryptoweather-mcp", "mcp": "/mcp"})
 
 @mcp.tool()
 async def get_bitcoin_signal() -> str:
@@ -178,18 +201,23 @@ Generally, clarity above 70% suggests higher reliability.
 
 def main():
     """Main entry point for the MCP server"""
-    # Parse command line arguments
-    parser = argparse.ArgumentParser(description="CryptoWeather MCP Server")
-    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
-    args = parser.parse_args()
-    
     # Debug output if enabled
     if args.debug:
         print("Starting CryptoWeather MCP Server...", file=sys.stderr)
         print(f"API Endpoint: {CRYPTOWEATHER_API_URL}", file=sys.stderr)
-    
-    # Run the server
-    mcp.run()
+
+    try:
+        if os.getenv("PORT") or os.getenv("RENDER"):
+            print(
+                f"Starting CryptoWeather MCP Server (Streamable HTTP) on 0.0.0.0:{PORT}",
+                file=sys.stderr,
+            )
+            mcp.run(transport="streamable-http")
+        else:
+            mcp.run()
+    except Exception as e:
+        print(f"Failed to start MCP server: {e}", file=sys.stderr)
+        sys.exit(1)
 
 # Main execution
 if __name__ == "__main__":
