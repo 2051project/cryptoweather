@@ -6,6 +6,7 @@ import json
 import requests
 from datetime import datetime
 from mcp.server.fastmcp import FastMCP
+from mcp.types import ToolAnnotations
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
@@ -158,9 +159,17 @@ def _format_signal(asset_key: str) -> str:
     return result
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Signal",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 async def get_crypto_signal(asset: str = "btc") -> str:
-    """Get current crypto weather prediction signal from CryptoWeather AI.
+    """크립토웨더(CryptoWeather) AI의 현재 암호화폐 가격 예측 시그널(날씨)을 조회합니다.
 
     Args:
         asset: Which coin to check — "btc" (Bitcoin), "eth" (Ethereum), or "ada" (Cardano)
@@ -177,23 +186,47 @@ async def get_crypto_signal(asset: str = "btc") -> str:
         return f"❌ Unexpected error: {str(e)}"
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Bitcoin Signal",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 async def get_bitcoin_signal() -> str:
-    """Get current Bitcoin price prediction signal from CryptoWeather AI
-    (same as get_crypto_signal with asset="btc")"""
+    """크립토웨더(CryptoWeather) AI의 현재 비트코인(Bitcoin) 가격 예측 시그널을 조회합니다.
+    (get_crypto_signal에서 asset="btc"인 경우와 동일)"""
     return await get_crypto_signal("btc")
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Ethereum Signal",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 async def get_ethereum_signal() -> str:
-    """Get current Ethereum price prediction signal (weather) from CryptoWeather AI
-    (same as get_crypto_signal with asset="eth")"""
+    """크립토웨더(CryptoWeather) AI의 현재 이더리움(Ethereum) 가격 예측 시그널을 조회합니다.
+    (get_crypto_signal에서 asset="eth"인 경우와 동일)"""
     return await get_crypto_signal("eth")
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Trading Recommendation",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 async def get_trading_recommendation(asset: str = "btc") -> str:
-    """Get detailed trading recommendation based on the current CryptoWeather signal.
+    """크립토웨더(CryptoWeather)의 현재 시그널을 바탕으로 상세 트레이딩 추천 정보를 제공합니다.
 
     Args:
         asset: Which coin to check — "btc" (Bitcoin), "eth" (Ethereum), or "ada" (Cardano)
@@ -246,9 +279,17 @@ async def get_trading_recommendation(asset: str = "btc") -> str:
         return f"❌ Unexpected error: {str(e)}"
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Performance Metrics",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 def get_performance_metrics(asset: str = "btc") -> str:
-    """Get CryptoWeather AI performance metrics and statistics.
+    """크립토웨더(CryptoWeather) AI의 성과 지표와 통계(백테스트, 수익률, 신뢰도)를 조회합니다.
 
     Args:
         asset: Which coin to check — "btc" (Bitcoin), "eth" (Ethereum), or "ada" (Cardano)
@@ -285,11 +326,19 @@ def get_performance_metrics(asset: str = "btc") -> str:
         return f"❌ Unexpected error: {str(e)}"
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Market Detail",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 def get_market_detail(asset: str = "btc") -> str:
-    """Get current market detail with technical indicators (what the AI looks at):
-    latest OHLCV candle, 24h change/volume, EMA 9/21/50, RSI(14),
-    Stochastic(14,3,3) and MACD(12,26,9) from CryptoWeather 1h market data.
+    """크립토웨더(CryptoWeather) 1시간봉 시장 데이터 기반의 현재 시장 상세 정보와
+    기술적 지표(AI가 참고하는 지표)를 조회합니다: 최신 OHLCV 캔들, 24시간 변동/거래량,
+    EMA 9/21/50, RSI(14), Stochastic(14,3,3), MACD(12,26,9).
 
     Args:
         asset: Which coin to check — "btc" (Bitcoin), "eth" (Ethereum), or "ada" (Cardano)
@@ -337,9 +386,17 @@ def get_market_detail(asset: str = "btc") -> str:
         return f"❌ Unexpected error: {str(e)}"
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather OHLCV Candles",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 def get_ohlcv(asset: str = "btc", limit: int = 24) -> str:
-    """Get recent 1h OHLCV candles (open, high, low, close, volume).
+    """크립토웨더(CryptoWeather)에서 최근 1시간봉 OHLCV 캔들(시가, 고가, 저가, 종가, 거래량)을 조회합니다.
 
     Args:
         asset: Which coin to check — "btc" (Bitcoin), "eth" (Ethereum), or "ada" (Cardano)
@@ -370,9 +427,17 @@ def get_ohlcv(asset: str = "btc", limit: int = 24) -> str:
         return f"❌ Unexpected error: {str(e)}"
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Technical Indicator",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 def get_indicator(asset: str = "btc", indicator: str = "rsi", period: int = 0) -> str:
-    """Get a single technical indicator or price field from CryptoWeather 1h market data.
+    """크립토웨더(CryptoWeather) 1시간봉 시장 데이터에서 단일 기술적 지표 또는 가격 필드를 조회합니다.
 
     Args:
         asset: Which coin to check — "btc" (Bitcoin), "eth" (Ethereum), or "ada" (Cardano)
@@ -465,9 +530,17 @@ def get_indicator(asset: str = "btc", indicator: str = "rsi", period: int = 0) -
         return f"❌ Unexpected error: {str(e)}"
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="CryptoWeather Signal Guide",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False,
+    )
+)
 def get_signal_history() -> str:
-    """Get information about CryptoWeather signal updates and methodology"""
+    """크립토웨더(CryptoWeather) 시그널의 업데이트 주기와 해석 방법(방법론)에 대한 안내를 제공합니다."""
     return """🕐 CryptoWeather Signal Information
 ========================================
 Supported Assets: Bitcoin (btc), Ethereum (eth), ADA (ada)

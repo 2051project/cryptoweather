@@ -22,55 +22,55 @@
   "tools": [
     {
       "name": "get_crypto_signal",
-      "description": "Get current crypto weather prediction signal from CryptoWeather AI",
+      "description": "크립토웨더(CryptoWeather) AI의 현재 암호화폐 가격 예측 시그널(날씨)을 조회합니다",
       "parameters": {"asset": "btc | eth | ada (default: btc)"},
       "returns": "Current signal with clarity, position, and profit information"
     },
     {
       "name": "get_bitcoin_signal",
-      "description": "Get current Bitcoin price prediction signal from CryptoWeather AI",
+      "description": "크립토웨더(CryptoWeather) AI의 현재 비트코인(Bitcoin) 가격 예측 시그널을 조회합니다",
       "parameters": {},
       "returns": "Current Bitcoin signal with clarity, position, and profit information"
     },
     {
       "name": "get_ethereum_signal",
-      "description": "Get current Ethereum price prediction signal from CryptoWeather AI",
+      "description": "크립토웨더(CryptoWeather) AI의 현재 이더리움(Ethereum) 가격 예측 시그널을 조회합니다",
       "parameters": {},
       "returns": "Current Ethereum signal with clarity, position, and profit information"
     },
     {
       "name": "get_trading_recommendation",
-      "description": "Get detailed trading recommendation based on the current signal",
+      "description": "크립토웨더(CryptoWeather)의 현재 시그널을 바탕으로 상세 트레이딩 추천 정보를 제공합니다",
       "parameters": {"asset": "btc | eth | ada (default: btc)"},
       "returns": "Detailed trading advice with buy/sell/hold recommendations"
     },
     {
       "name": "get_performance_metrics",
-      "description": "Get CryptoWeather AI performance metrics and statistics",
+      "description": "크립토웨더(CryptoWeather) AI의 성과 지표와 통계(백테스트, 수익률, 신뢰도)를 조회합니다",
       "parameters": {"asset": "btc | eth | ada (default: btc)"},
       "returns": "Historical performance data, backtest results, and profit metrics"
     },
     {
       "name": "get_market_detail",
-      "description": "Get market detail with technical indicators from 1h candles: OHLCV, 24h change/volume, EMA 9/21/50, RSI(14), Stochastic(14,3,3), MACD(12,26,9)",
+      "description": "크립토웨더(CryptoWeather) 1시간봉 시장 데이터 기반의 시장 상세 정보와 기술적 지표를 조회합니다: OHLCV, 24시간 변동/거래량, EMA 9/21/50, RSI(14), Stochastic(14,3,3), MACD(12,26,9)",
       "parameters": {"asset": "btc | eth | ada (default: btc)"},
       "returns": "Full technical snapshot of the current market"
     },
     {
       "name": "get_ohlcv",
-      "description": "Get recent 1h OHLCV candles (open, high, low, close, volume)",
+      "description": "크립토웨더(CryptoWeather)에서 최근 1시간봉 OHLCV 캔들(시가, 고가, 저가, 종가, 거래량)을 조회합니다",
       "parameters": {"asset": "btc | eth | ada (default: btc)", "limit": "number of candles, 1-200 (default: 24)"},
       "returns": "Table of recent hourly candles"
     },
     {
       "name": "get_indicator",
-      "description": "Get a single technical indicator or price field (open/high/low/close/volume/rsi/stochastic/ema/macd)",
+      "description": "크립토웨더(CryptoWeather) 1시간봉 시장 데이터에서 단일 기술적 지표 또는 가격 필드를 조회합니다 (open/high/low/close/volume/rsi/stochastic/ema/macd)",
       "parameters": {"asset": "btc | eth | ada (default: btc)", "indicator": "indicator name (default: rsi)", "period": "optional period override for rsi/ema"},
       "returns": "Latest value(s) of the requested indicator with interpretation"
     },
     {
       "name": "get_signal_history",
-      "description": "Get information about CryptoWeather signal updates and methodology",
+      "description": "크립토웨더(CryptoWeather) 시그널의 업데이트 주기와 해석 방법(방법론)에 대한 안내를 제공합니다",
       "parameters": {},
       "returns": "Information about signal types, update frequency, and interpretation guide"
     }
